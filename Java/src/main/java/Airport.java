@@ -3,11 +3,11 @@
  * @Version 1.1
  * @Since   4-Jan-2019
  */
-import Planes.ExperimentalPlane;
+import planes.ExperimentalPlane;
 import models.MilitaryType;
-import Planes.MilitaryPlane;
-import Planes.PassengerPlane;
-import Planes.Plane;
+import planes.MilitaryPlane;
+import planes.PassengerPlane;
+import planes.Plane;
 
 import java.util.List;
 import java.util.Collection;
@@ -18,18 +18,22 @@ import java.util.stream.Collectors;
 
 public class Airport {
     private final List<? extends Plane> planes;
+
     public Airport(List<? extends Plane> planes) {
         this.planes = planes;
     }
+
     public List<PassengerPlane> getPassengerPlanes() {
-        return (List<PassengerPlane>) planes.stream()
-                .filter(plane -> plane instanceof PassengerPlane)
+        return planes.stream()
+                .filter(PassengerPlane.class::isInstance)
+                .map(PassengerPlane.class::cast)
                 .collect(Collectors.toList());
     }
 
     public List<MilitaryPlane> getMilitaryPlanes() {
-        return (List<MilitaryPlane>) planes.stream()
-                .filter(plane -> plane instanceof MilitaryPlane)
+        return planes.stream()
+                .filter(MilitaryPlane.class::isInstance)
+                .map(MilitaryPlane.class::cast)
                 .collect(Collectors.toList());
     }
 
@@ -45,14 +49,12 @@ public class Airport {
     }
 
     public List<MilitaryPlane> getTransportMilitaryPlanes() {
-
         return getMilitaryPlanes().stream()
                 .filter(plane -> plane.getType() == MilitaryType.TRANSPORT)
                 .collect(Collectors.toList());
     }
 
     public List<MilitaryPlane> getBomberMilitaryPlanes() {
-
         return getMilitaryPlanes().stream()
                 .filter(plane -> plane.getType() == MilitaryType.BOMBER)
                 .collect(Collectors.toList());
@@ -60,25 +62,25 @@ public class Airport {
     }
 
     public List<ExperimentalPlane> getExperimentalPlanes() {
-
-        return (List<ExperimentalPlane>) planes.stream()
-                .filter(plane -> plane instanceof ExperimentalPlane)
+        return planes.stream()
+                .filter(ExperimentalPlane.class::isInstance)
+                .map(ExperimentalPlane.class::cast)
                 .collect(Collectors.toList());
     }
 
     public Airport sortByMaxDistance() {
-        planes.sort((Comparator<Plane>) (o1, o2) -> o1.getMaxFlightDistance() - o2.getMaxFlightDistance());
+        planes.sort(Comparator.comparingInt(Plane::getMaxFlightDistance));
         return this;
     }
 
 
     public Airport sortByMaxSpeed() {
-        planes.sort((Comparator<Plane>) (o1, o2) -> o1.getMaxSpeed() - o2.getMaxSpeed());
+        planes.sort(Comparator.comparingInt(Plane::getMaxSpeed));
         return this;
     }
 
     public Airport sortByMaxLoadCapacity() {
-        planes.sort((Comparator<Plane>) (o1, o2) -> o1.getMaxLoadCapacity() - o2.getMaxLoadCapacity());
+        planes.sort(Comparator.comparingInt(Plane::getMaxLoadCapacity));
         return this;
     }
 
@@ -95,8 +97,7 @@ public class Airport {
     @Override
     public String toString() {
         return "Airport{" +
-                "Planes=\n" + planes.toString() +
-                "}\n";
+                "Planes=\n" + planes.toString() + "}\n";
     }
 
 }

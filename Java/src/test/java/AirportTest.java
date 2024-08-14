@@ -1,12 +1,12 @@
-import Planes.ExperimentalPlane;
+import planes.ExperimentalPlane;
 import models.ClassificationLevel;
 import models.ExperimentalType;
 import models.MilitaryType;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import Planes.MilitaryPlane;
-import Planes.PassengerPlane;
-import Planes.Plane;
+import planes.MilitaryPlane;
+import planes.PassengerPlane;
+import planes.Plane;
 
 import java.util.Arrays;
 import java.util.List;
@@ -31,7 +31,7 @@ public class AirportTest {
             new ExperimentalPlane("Ryan X-13 Vertijet", 560, 307, 500, ExperimentalType.VTOL, ClassificationLevel.TOP_SECRET)
     );
 
-    private static PassengerPlane passengerPlaneWithMaxPassengerCapacity = new PassengerPlane("Boeing-747", 980, 16100, 70500, 242);
+    private static final PassengerPlane passengerPlaneWithMaxPassengerCapacity = new PassengerPlane("Boeing-747", 980, 16100, 70500, 242);
 
     @Test
     public void testGetTransportMilitaryPlanes() {
@@ -44,7 +44,7 @@ public class AirportTest {
 
     @Test
     public void testGetPassengerPlaneWithMaxCapacity() {
-        Assert.assertEquals(passengerPlaneWithMaxPassengerCapacity, new Airport(planes).getPassengerPlaneWithMaxPassengersCapacity());
+        Assert.assertEquals(new Airport(planes).getPassengerPlaneWithMaxPassengersCapacity(), passengerPlaneWithMaxPassengerCapacity);
     }
 
     @Test
@@ -70,7 +70,7 @@ public class AirportTest {
     }
 
     @Test
-    public void testExperimentalPlanesHaveClassificationLevelHigherThanUnclassified(){
+    public void testExperimentalPlanesHaveClassificationLevelHigherThanUnclassified() {
         List<ExperimentalPlane> experimentalPlanes = new Airport(planes).getExperimentalPlanes();
         for(ExperimentalPlane experimentalPlane : experimentalPlanes){
             Assert.assertNotEquals(experimentalPlane.getClassificationLevel() , ClassificationLevel.UNCLASSIFIED);

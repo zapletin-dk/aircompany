@@ -1,4 +1,4 @@
-package Planes;
+package planes;
 
 import models.ClassificationLevel;
 import models.ExperimentalType;
@@ -19,7 +19,8 @@ public class ExperimentalPlane extends Plane {
     public ClassificationLevel getClassificationLevel() {
         return classificationLevel;
     }
-    public void setClassificationLevel(ClassificationLevel classificationLevel){
+
+    public void setClassificationLevel(ClassificationLevel classificationLevel) {
         this.classificationLevel = classificationLevel;
     }
 

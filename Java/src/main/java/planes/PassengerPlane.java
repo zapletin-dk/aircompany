@@ -1,9 +1,8 @@
-package Planes;
+package planes;
 
 import java.util.Objects;
 
-public class PassengerPlane extends Plane{
-
+public class PassengerPlane extends Plane {
     private final int passengersCapacity;
 
     public PassengerPlane(String model, int maxSpeed, int maxFlightDistance, int maxLoadCapacity, int passengersCapacity) {
@@ -18,9 +17,7 @@ public class PassengerPlane extends Plane{
 
     @Override
     public String toString() {
-        return super.toString().replace("}",
-                ", passengersCapacity=" + passengersCapacity +
-                        "}\n");
+        return super.toString().replace("}", ", passengersCapacity=" + passengersCapacity + "}\n");
     }
 
     @Override
